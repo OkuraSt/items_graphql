@@ -1,22 +1,17 @@
 const typeDefinitions = `
-type Author {
-  id: Int
-  firstName: String
-  lastName: String
-  posts: [Post]
+type Update {
+  Descripcion: String
+  Tipo: String
 }
 
-type Post {
-  id: Int
-  title: String
-  text: String
-  views: Int
-  author: Author
+type Item {
+  Titulo: String
+  Descripcion: String
+  Updates: [Update]
 }
 
 type Query {
-  author(firstName: String, lastName: String): Author
-  getFortuneCookie: String
+  items: [Item]
 }
 
 schema {
