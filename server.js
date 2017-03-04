@@ -1,14 +1,10 @@
 import express from 'express';
-import Schema from './data/schema';
-import Resolvers from './data/resolvers';
+import executableSchema from './data/schema';
 // import Mocks from './data/mocks';
 
 import {graphqlExpress, graphiqlExpress} from 'graphql-server-express';
-import {makeExecutableSchema} from 'graphql-tools';
 import  cors  from 'cors';
 import bodyParser from 'body-parser';
-
-import Item from './data/models/item'
 
 const GRAPHQL_PORT = 8080;
 
@@ -26,15 +22,6 @@ var corsOptions = {
 };
 graphQLServer.use(cors(corsOptions));
 
-const executableSchema = makeExecutableSchema({
-    typeDefs: Schema,
-    resolvers: Resolvers(),
-    allowUndefinedInResolve: true,
-    printErrors: true,
-    resolverValidationOptions: {
-        requireResolversForNonScalar: false
-    },
-});
 
 // addMockFunctionsToSchema({
 //   schema: executableSchema,
