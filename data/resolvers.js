@@ -1,8 +1,10 @@
+import {Item} from './connectors';
 
-const resolvers = (models) => ({
+
+const resolvers = () => ({
     Query: {
         items(_, args) {
-            return models.Item.find().then((response) => {
+            return Item.find().then((response) => {
                 return response;
             });
         }
