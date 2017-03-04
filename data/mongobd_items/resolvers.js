@@ -1,7 +1,7 @@
 import {Item} from './connectors';
 
 
-const resolvers = () => ({
+export const resolvers = {
     Query: {
         items(_, args) {
             return Item.find().then((response) => {
@@ -9,6 +9,4 @@ const resolvers = () => ({
             });
         }
     },
-});
-
-export default resolvers;
+};
