@@ -5,27 +5,30 @@ import Resolvers from './data/resolvers';
 
 import {graphqlExpress, graphiqlExpress} from 'graphql-server-express';
 import {makeExecutableSchema} from 'graphql-tools';
+import  cors  from 'cors';
 import bodyParser from 'body-parser';
-import Mongoose from 'mongoose';
 
 import Item from './data/models/item'
 
 const GRAPHQL_PORT = 8080;
-const mongo = Mongoose.connect('mongodb://localhost/items_db');
-
-//Verificacion de la conexion con mongo
-const db = Mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-    console.log('Conectado');
-    // we're connected!
-});
 
 const graphQLServer = express();
 
+var whitelist = [
+    'http://localhost:3000',
+];
+var corsOptions = {
+    origin: function(origin, callback){
+        var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
+        callback(null, originIsWhitelisted);
+    },
+    credentials: true
+};
+graphQLServer.use(cors(corsOptions));
+
 const executableSchema = makeExecutableSchema({
     typeDefs: Schema,
-    resolvers: Resolvers({ Item }),
+    resolvers: Resolvers(),
     allowUndefinedInResolve: true,
     printErrors: true,
     resolverValidationOptions: {
