@@ -1,13 +1,27 @@
 
 export const schema = [`
 type Update {
-  Descripcion: String
-  Tipo: String
+  description: String
+  status: String
+  date: String
 }
-
+type Activities {
+  description: String
+  createdAt: String
+  status: String
+}
+type Tag {
+  type: String
+  name: String
+}
 type Item {
-  Titulo: String
-  Descripcion: String
-  Updates: [Update]
+  title: String!
+  description: String
+  configString: String
+  deadline: String
+  nextRequiredUpdate: String
+  updates: [Update]
+  activities: [Activities]
+  tags: [Tag]
 }
 `];
