@@ -9,17 +9,9 @@ import {makeExecutableSchema} from 'graphql-tools';
 
 // Definicion de root resolvers y schemas
 const rootSchema = [`
-type Query {
-  items: [Item]
-}
 
-schema {
-  query: Query
-}
 `];
 const rootResolvers = {
-    Query: {
-    },
 };
 
 const schema = [...rootSchema, ...mongoSchema];

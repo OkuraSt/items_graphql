@@ -15,6 +15,7 @@ type Tag {
   name: String
 }
 type Item {
+  _id: ID!
   title: String!
   description: String
   configString: String
@@ -23,5 +24,27 @@ type Item {
   updates: [Update]
   activities: [Activities]
   tags: [Tag]
+}
+input ItemInput{
+  title: String!
+  description: String
+}
+
+type Mutation {
+  createItem (input: ItemInput! ): Item
+  updateItem (
+    id: ID!
+    title: String
+    description: String 
+  ): Item
+}
+
+type Query {
+  items: [Item]
+}
+
+schema {
+  query: Query
+  mutation: Mutation
 }
 `];
