@@ -12,7 +12,7 @@ const ItemsSchema = Mongoose.Schema({
         {
             description: String,
             status: String,
-            date: String // TODO: Definir correctamente esta fecha
+            createdAt: String // TODO: Definir correctamente esta fecha
         }
     ],
     activities: [
@@ -28,12 +28,14 @@ const ItemsSchema = Mongoose.Schema({
             name: String
         }
     ]
-},{timestamps: { createdAt: 'created_at' }});
+},{timestamps: { createdAt: 'createdAt' }});
 
 ItemsSchema.virtual('nextRequiredUpdate').get(function () {
-    //TODO: Implementar la generacion de la fecha de siguiente update
-
-    return this.updates.length ? this.updates[0].date : "";
+    if (this.updates.length) {
+        return this.updates[0].createdAt;
+    } else {
+        return null;
+    }
 });
 
 export default Mongoose.model('Item', ItemsSchema);
