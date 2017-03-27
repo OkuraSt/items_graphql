@@ -24,6 +24,7 @@ type Item {
   updates: [Update]
   activities: [Activities]
   tags: [Tag]
+  createdAt: String
 }
 input ItemInput{
   title: String!
